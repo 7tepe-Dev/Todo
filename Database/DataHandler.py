@@ -1,23 +1,17 @@
 import json
 class DataHandler:
      def __init__(self):
-
          pass
 
      def readfromDB(self):
-         database = ""
          with open('user.txt') as f:
-              data = json.load(f)
-
-            
+              data = json.load(f)         
          return data
-         pass
 
      def createNewUser(self,data):
          newObject = DataHandler()
          database = newObject.readfromDB()
          database.append(data)
-
          with open('user.txt', 'w') as outfile:
             json.dump(database, outfile)
 
@@ -28,7 +22,6 @@ class DataHandler:
              if user.get("username") == username :
                 user.get("task").append(newTask)
                 break
-
          with open('user.txt', 'w') as outfile:
             json.dump(database, outfile)    
 
@@ -39,17 +32,8 @@ class DataHandler:
              if user.get("username") == username :
                 user.get("task").remove(oldTask)
                 break
-
          with open('user.txt', 'w') as outfile:
             json.dump(database, outfile)
-                
-             
-         
-
-
-           
-         
-
 
      def checkLogin(self , username , password):
          newObject = DataHandler()
@@ -64,9 +48,8 @@ class DataHandler:
                 
                    
            
-
+# Tests for Datahandler class
 database = DataHandler()
-
 """
 data1 = {"username" : "Mert","password": "123" , "tasks":["reading book","go to the school"]}
 data2 = {"username" : "Kaan","password": "abc" , "tasks":["do homework","do some exercise"]}
@@ -86,9 +69,10 @@ database.checkLogin("Mert", "123")
 data4 = {"username" : "Mehmet","password": "dfg" , "tasks":["go to gym","prepare for English exam"]}
 
 database.createNewUser(data4)
-"""
+
 database.addNewTask("Mert","go home")
 database.removeNewTask("Yusuf","study English")
+"""
 
 
 

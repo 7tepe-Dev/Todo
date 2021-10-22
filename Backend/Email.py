@@ -22,6 +22,7 @@ class Email:
         server.sendmail(self.sender, self.targets, self.msg.as_string())
         server.quit()
 
+# Tests for Email class
 email = Email()
 email.setEmail("Hacklendinizzzz!!!!!")
 email.sendEmail()
