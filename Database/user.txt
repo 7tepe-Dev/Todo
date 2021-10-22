@@ -1,0 +1,1 @@
+[{"username": "Mert", "password": "123", "tasks": ["reading book", "go to the school", "go home"]}, {"username": "Kaan", "password": "abc", "tasks": ["do homework", "do some exercise"]}, {"username": "Yusuf", "password": "456", "tasks": ["prepare for Math exam"]}, {"username": "Mehmet", "password": "dfg", "tasks": ["go to gym", "prepare for English exam"]}]
