@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter.font import Font
+from tkinter import filedialog
+import os
+import pickle
 
 #crate app window, set title, logo and size
 root = Tk()
@@ -37,10 +40,10 @@ my_list = Listbox(my_frame,
 my_list.pack(side=LEFT, fill=BOTH)
 
 #temporary list
-stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
-# add temp list to listbox
-for item in stuff:
-    my_list.insert(END, item)
+# stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
+# # add temp list to listbox
+# for item in stuff:
+#     my_list.insert(END, item)
 
 #create scrollbar
 my_scrollbar = Scrollbar(my_frame)
@@ -51,12 +54,12 @@ my_list.config(yscrollcommand=my_scrollbar.set)
 my_scrollbar.config(command=my_list.yview)
 
 #entry box to add items
-my_entry = Entry(root, font=("Arial", 12))
-my_entry.pack(pady=20)
+my_entry = Entry(root, font=("Arial", 16), width=42)
+my_entry.pack(pady=30)
 
 #create button frame
 button_frame = Frame(root)
-button_frame.pack(pady=50)
+button_frame.pack(pady=20)
 
 # create command functions
 def delete_item():
@@ -84,25 +87,102 @@ def uncross_item():
     my_list.select_clear(0, END)
 
 def delete_crossed():
+    # print(my_list.size())
     count = 0
     while count<my_list.size():
-        if my_list.itemcget(count, "fg") == "bcbcbc":
+        if my_list.itemcget(count, "fg") == "#bcbcbc":
             my_list.delete(my_list.index(count))
-        count+=1
+        else:
+            count+=1
+
+# print(os.getlogin())
+# print(os.getenv('username'))
+
+path = ''.join(('C:/Users/', os.getenv('username'), '/Desktop/'))
+
+def save_list():
+    file_name = filedialog.asksaveasfilename(
+        initialdir=path,
+        title="Save File",
+        filetypes=(
+            ("Dat Files", "*.dat"),
+            ("Json Files", "*.json"),
+            ("All Files", "*.*")
+        )
+    )
+    if file_name:
+        if file_name.endswith(".dat"):
+            pass
+        else:
+            file_name = f'{file_name}.dat'
+
+        # delete crossed items when saving to a file
+        count = 0
+        while count<my_list.size():
+            if my_list.itemcget(count, "fg") == "#bcbcbc":
+                my_list.delete(my_list.index(count))
+            else:
+                count+=1
+
+        # grab all items from the list
+        stuff = my_list.get(0, END)
+
+        # open file
+        output_file = open(file_name, 'wb')
+
+        # add items to the file
+        pickle.dump(stuff, output_file)
+
+def open_list():
+    file_name = filedialog.askopenfilename(
+        initialdir=path,
+        title="Open File",
+        filetypes=(
+            ("Dat Files", "*.dat"),
+            ("Json Files", "*.json"),
+            ("All Files", "*.*")
+        )
+    )
+
+    if file_name:
+        # delete the currently open list
+        my_list.delete(0, END)
+
+        # open the file
+        input_file = open(file_name, 'rb')
+
+        # load data from file
+        stuff = pickle.load(input_file)
+
+        # output items to the screen
+
+        for item in stuff:
+            my_list.insert(END, item)
+
+def clear_list():
+    my_list.delete(0, END)
 
 # add buttons
-delete_button = Button(button_frame, text="Delete Item", command=delete_item)
 add_button = Button(button_frame, text="Add Item", command=add_item)
+delete_button = Button(button_frame, text="Delete Item", command=delete_item)
 cross_off_button = Button(button_frame, text="Cross Off Item", command=cross_off_item)
 uncross_button = Button(button_frame, text="Uncross Item", command=uncross_item)
 
 delete_crossed_button = Button(button_frame, text="Delete Crossed Items", command=delete_crossed)
 
+save_list_button = Button(button_frame, text="Save This ToDo", command=save_list)
+open_list_button = Button(button_frame, text="Open a ToDo List", command=open_list)
+clear_list_button = Button(button_frame, text="Clear This ToDo", command=clear_list)
+
 # grid the buttons, only 1 row with all buttons
-delete_button.grid(row=0, column=0)
-add_button.grid(row=0, column=1,padx=20)
+add_button.grid(row=0, column=0)
+delete_button.grid(row=0, column=1,padx=20)
 cross_off_button.grid(row=0, column=2)
 uncross_button.grid(row=0, column=3, padx=20)
 delete_crossed_button.grid(row=0, column=4)
+
+save_list_button.grid(row=1, column=0, pady=10)
+open_list_button.grid(row=1, column=1, padx=20)
+clear_list_button.grid(row=1, column=4)
 
 root.mainloop()
