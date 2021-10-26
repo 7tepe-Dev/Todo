@@ -1,15 +1,16 @@
 import json
+
 class DataHandler:
      def __init__(self):
          pass
 
      def readfromDB(self):
-         with open('user.txt') as f:
+         with open('../Todo/Database/user.txt') as f:
               data = json.load(f)         
          return data
 
      def writeToDB(self, database):
-         with open('user.txt', 'w') as outfile:
+         with open('../Todo/Database/user.txt', 'w') as outfile:
             json.dump(database, outfile)
 
      def createNewUser(self,data):

@@ -2,15 +2,20 @@ from tkinter import *
 from tkinter.font import Font
 from tkinter import filedialog
 import os
+import sys
 import pickle
+
+# To import our modules
+sys.path.insert(0, '../Todo/Database')
+from DataHandler import *
+
 class todoMain:
-    def __init__(self):
-                
+    def __init__(self):                
         #crate app window, set title, logo and size
-        global root 
+        global root
         root = Tk()
         root.title('7.Tepe-Dev Python To-Do List App')
-        root.iconbitmap('D:/Github Kodları/ToDo/Frontend/images/appLogo.ico')
+        root.iconbitmap('../ToDo/Frontend/images/appLogo.ico')
         root.geometry("640x480")
         root.config(bg="#323")
         root.resizable(False, False) # not resizable in both directions
@@ -45,10 +50,11 @@ class todoMain:
         my_list.pack(side=LEFT, fill=BOTH)
 
         #temporary list
-        # stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
+        #stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
+        stuff = users[0].get("tasks")
         # # add temp list to listbox
-        # for item in stuff:
-        #     my_list.insert(END, item)
+        for item in stuff:
+             my_list.insert(END, item)
 
         #create scrollbar
         my_scrollbar = Scrollbar(my_frame)
