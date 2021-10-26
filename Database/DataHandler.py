@@ -44,10 +44,11 @@ class DataHandler:
          for user in database :
              if user.get("username") == username and user.get("password") == password :
                 print("Başarılı")
-                print(user)  
+                return True  
                 break
              else:
                 print("Başarısız Giriş") 
+                return False
      
                           
 # Tests for Datahandler class

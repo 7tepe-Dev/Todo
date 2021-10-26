@@ -10,7 +10,8 @@ sys.path.insert(0, '../Todo/Database')
 from DataHandler import *
 
 class todoMain:
-    def __init__(self):                
+    def __init__(self):  
+        
         #crate app window, set title, logo and size
         global root
         root = Tk()
@@ -51,10 +52,10 @@ class todoMain:
 
         #temporary list
         #stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
-        stuff = users[0].get("tasks")
+        #stuff = users[0].get("tasks")
         # # add temp list to listbox
-        for item in stuff:
-             my_list.insert(END, item)
+        # for item in stuff:
+        #     my_list.insert(END, item)
 
         #create scrollbar
         my_scrollbar = Scrollbar(my_frame)
