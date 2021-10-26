@@ -5,13 +5,15 @@ import os
 import sys
 import pickle
 
+
 # To import our modules
 sys.path.insert(0, '../Todo/Database')
 from DataHandler import *
 
-class todoMain:
-    def __init__(self):  
-        
+class todoMain():
+    def __init__(self, currentUser):
+        database = DataHandler()    
+        self.currentUser = currentUser          
         #crate app window, set title, logo and size
         global root
         root = Tk()
@@ -51,11 +53,10 @@ class todoMain:
         my_list.pack(side=LEFT, fill=BOTH)
 
         #temporary list
-        #stuff = ["walk the dog", "buy groceries", "go to school", "bla bla bla"]
-        #stuff = users[0].get("tasks")
+        stuff = self.currentUser.get("tasks")
         # # add temp list to listbox
-        # for item in stuff:
-        #     my_list.insert(END, item)
+        for item in stuff:
+            my_list.insert(END, item)
 
         #create scrollbar
         my_scrollbar = Scrollbar(my_frame)
@@ -78,9 +79,10 @@ class todoMain:
             my_list.delete(ANCHOR) # deletes the highlighted item
 
         def add_item():
-            my_list.insert(END, my_entry.get()) # gets data from box and inserts it
-                                                # to the end of the list
+            my_list.insert(END, my_entry.get()) # gets data from box and inserts it to the end of the list
+            database.addNewTask(self.currentUser.get("username"), my_entry.get())
             my_entry.delete(0, END) # after inserting new item, empty the entry box
+
 
         def cross_off_item(): # cross off item, but we cant really use cross, just lighten the color
             my_list.itemconfig(
@@ -199,4 +201,4 @@ class todoMain:
 
         root.mainloop()
 
-todoMainObject = todoMain()
+# todoMainObject = todoMain("")

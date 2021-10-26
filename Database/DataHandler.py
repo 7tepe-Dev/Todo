@@ -16,11 +16,10 @@ class DataHandler:
      def createNewUser(self,data):
          handlerObject = DataHandler()
          database = handlerObject.readfromDB()
-         #print(len(database))
          database.append(data)
          handlerObject.writeToDB(database)
 
-     def addNewTask(self ,username, newTask):
+     def addNewTask(self, username, newTask):
          handlerObject = DataHandler()
          database = handlerObject.readfromDB()
          for user in database :
@@ -38,17 +37,16 @@ class DataHandler:
                 break
          handlerObject.writeToDB(database)
 
-     def checkLogin(self , username , password):
+     def checkLogin(self, username, password):
          newObject = DataHandler()
          database = newObject.readfromDB()
          for user in database :
              if user.get("username") == username and user.get("password") == password :
                 print("Başarılı")
-                return True  
-                break
+                return user  
              else:
-                print("Başarısız Giriş") 
-                return False
+                pass
+         return None                       
      
                           
 # Tests for Datahandler class
@@ -66,7 +64,7 @@ for data in [data1, data2, data3, data4]:
 """
 ### Check User in DB
 database = DataHandler()
-database.checkLogin("Mert", "123")
+test = database.checkLogin("Mert", "123")
 """
 
 """
