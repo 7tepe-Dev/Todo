@@ -49,5 +49,3 @@ class todoLogin():
         Submit.place(x=245, y=240)
 
         root.mainloop()
-
-todoLoginObject = todoLogin()
