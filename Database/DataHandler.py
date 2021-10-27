@@ -55,7 +55,7 @@ class DataHandler:
 database = DataHandler()
 data1 = {"username" : "Mert","password": "123", "email":"mertsancar@hot", "tasks":["reading book","go to the school"]}
 data2 = {"username" : "Kaan","password": "abc", "email":"kaansimsek@gmail", "tasks":["do homework","do some exercise"]}
-data3 = {"username" : "Yusuf","password": "456" , "email":"ekerdiker18@gmail.com", "tasks":["study English","prepare for Math exam"]}
+data3 = {"username" : "Yusuf","password": "456" , "email":"ekerdiker@gmail", "tasks":["study English","prepare for Math exam"]}
 data4 = {"username" : "Mehmet","password": "dfg", "email":"memo@yahoo", "tasks":["go to gym","prepare for English exam"]}
 for data in [data1, data2, data3, data4]:
     database.createNewUser(data)
