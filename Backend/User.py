@@ -1,12 +1,16 @@
-from ssl import SSL_ERROR_INVALID_ERROR_CODE
-
+import sys
+sys.path.insert(0, '../Todo/Database')
+from DataHandler import *
 
 class User:
-    def __init__(self, username, password, usertasks):
+    def __init__(self, username, password, email, tasks):
         self.username = username
         self.passsword = password
-        self.usertasks = usertasks
-        userData = {"username":self.username, "password":self.passsword, "usertasks":self.usertasks}
+        self.tasks = tasks
+        self.email = email
+        userData = {"username":self.username, "password":self.passsword, "email":self.email, "tasks":self.tasks}
+        dataHandlerObject = DataHandler()
+        dataHandlerObject.createNewUser(userData)
         
     def getUserName(self):
         return self.username
@@ -21,6 +25,7 @@ class User:
         self.usertasks.remove(oldTask)
 
 # Tests for User class
+"""
 User1 = User("Kaan", "1234", ["Kitap oku"])
 User2 = User("Mert", "0000", ["Markete git"])
 User3 = User("Yusuf", "1212", ["Ders çalış"])
@@ -32,3 +37,4 @@ print(User1.getUserTasks())
 User1.addTask("Okula git")
 User1.removeTask("Kitap oku")
 print(User1.getUserTasks())
+"""

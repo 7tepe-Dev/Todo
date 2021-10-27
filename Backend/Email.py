@@ -2,13 +2,13 @@ import smtplib
 from email.mime.text import MIMEText
 
 class Email:
-    def __init__(self):
+    def __init__(self, target):
         self.host = "smtp.gmail.com"
         self.port = 465           #587
-        self.username = "kaanto77@gmail.com"
-        self.password = "11111"
-        self.sender = "kaanto77@gmail.com"
-        self.targets = ["ekerdiker.yusuf@gmail.com"]
+        self.username = "ekerdiker18@gmail.com"
+        self.password = "BURAYA PASSWORD YAZINIZ"
+        self.sender = "ekerdiker18@gmail.com"
+        self.targets = [target]
 
     def setEmail(self, userTasks):
         self.msg = MIMEText("{}".format(userTasks))
@@ -21,8 +21,3 @@ class Email:
         server.login(self.username, self.password)
         server.sendmail(self.sender, self.targets, self.msg.as_string())
         server.quit()
-
-# Tests for Email class
-email = Email()
-email.setEmail("Hacklendinizzzz!!!!!")
-email.sendEmail()
