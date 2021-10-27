@@ -1,13 +1,10 @@
-from os import PathLike
-import sys
 from tkinter import *
 import tkinter.messagebox as MessageBox
 
-sys.path.insert(0, '../Todo/Database')
-from DataHandler import *
-from todo import todoMain
-from signin import todoSignin
-
+import Database.dataHandler as db
+import Frontend.todo as td
+# from login import todoLogin
+import Frontend.signin as sign
 
 class todoLogin():
     def __init__(self):
@@ -23,16 +20,15 @@ class todoLogin():
         def validate():
             username = UserEntry.get()
             password = PassEntry.get()
-            dataHandlerObject = DataHandler()
+            dataHandlerObject = db.DataHandler()
             currentUser = dataHandlerObject.checkLogin(username, password)
             if currentUser != None:
                 root.destroy()
-                todoObject = todoMain(currentUser)
+                todoObject = td.todoMain(currentUser)
 
         def signinRedirect():
-            pass
-            #root.destroy()
-            #singinObject = todoSignin()
+            root.destroy()
+            singinObject = sign.todoSignin()
 
         #Labels
         TitleLabel = Label(root, text="ToDo",bg="#323" ,fg="white", font = ("Arial",23,"bold"))

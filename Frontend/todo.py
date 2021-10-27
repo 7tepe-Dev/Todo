@@ -5,14 +5,13 @@ import os
 import sys
 import pickle
 
-# To import our modules
-sys.path.insert(0, '../Todo/Database')
-from DataHandler import *
-from email import *
+
+import Database.dataHandler as db
+import Backend.email as mail
 
 class todoMain():
     def __init__(self, currentUser):
-        database = DataHandler()    
+        database = db.DataHandler()    
         self.currentUser = currentUser          
         #crate app window, set title, logo and size
         global root
@@ -177,7 +176,7 @@ class todoMain():
             my_list.delete(0, END)
 
         def send_email():
-            email = Email(self.currentUser.get("email"))
+            email = mail.Email(self.currentUser.get("email"))
             email.setEmail(self.currentUser.get("tasks"))
             email.sendEmail()
 
@@ -209,3 +208,19 @@ class todoMain():
         root.mainloop()
 
 # todoMainObject = todoMain("")
+# frontendPath = "/ToDo/Frontend/"
+# backendPath = "/ToDo/Backend/"
+# databasePath = "/ToDo/Database/"
+# if frontendPath not in sys.path and backendPath not in sys.path and databasePath not in sys.path:
+#     sys.path.append(frontendPath)
+#     sys.path.append(backendPath)
+#     sys.path.append(databasePath)
+#     print("Paths added")
+
+# print(sys.path)
+# print(os.getcwd())
+
+# from login import todoLogin
+# from dataHandler import DataHandler
+# from todo import todoMain
+# from signin import todoSignin

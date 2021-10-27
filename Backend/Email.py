@@ -4,10 +4,10 @@ from email.mime.text import MIMEText
 class Email:
     def __init__(self, target):
         self.host = "smtp.gmail.com"
-        self.port = 465           #587
-        self.username = "ekerdiker@gmail"
-        self.password = "BURAYA PASSWORD YAZINIZ"
-        self.sender = "ekerdiker@gmail"
+        self.port = 465 #587
+        self.username = ""
+        self.password = ""
+        self.sender = ""
         self.targets = [target]
 
     def setEmail(self, userTasks):

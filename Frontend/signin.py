@@ -3,13 +3,12 @@ import sys
 from tkinter import *
 import tkinter.messagebox as MessageBox
 
-sys.path.insert(0, '../Todo/Backend')
-sys.path.insert(1, '../Todo/Database')
-from DataHandler import *
-from todo import todoMain
-from login import todoLogin
-from user import User
-
+import Database.dataHandler as db
+# from todo import todoMain
+# from login import todoLogin
+import Backend.user as usr
+import Frontend.todo as td
+import Frontend.login as log
 class todoSignin():
     def __init__(self):
         global root
@@ -26,17 +25,16 @@ class todoSignin():
             password = PassEntry.get()
             email = EmailEntry.get()
             tasks = []
-            dataHandlerObject = DataHandler()
-            newUser = User(username, password, email, tasks)
+            dataHandlerObject = db.DataHandler()
+            newUser = usr.User(username, password, email, tasks)
             currentUser = dataHandlerObject.checkLogin(username, password)
             if currentUser != None:
                 root.destroy()
-                todoObject = todoMain(currentUser)
+                todoObject = td.todoMain(currentUser)
 
         def loginRedirect():
-            pass
-            #root.destroy()
-            #loginObject = todoLogin()
+            root.destroy()
+            loginObject = log.todoLogin()
 
         #Labels
         TitleLabel = Label(root, text="ToDo",bg="#323" ,fg="white", font = ("Arial",23,"bold"))

@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0, '../Todo/Database')
-from DataHandler import *
+
+import Database.dataHandler as db
 
 class User:
     def __init__(self, username, password, email, tasks):
@@ -9,7 +9,7 @@ class User:
         self.tasks = tasks
         self.email = email
         userData = {"username":self.username, "password":self.passsword, "email":self.email, "tasks":self.tasks}
-        dataHandlerObject = DataHandler()
+        dataHandlerObject = db.DataHandler()
         dataHandlerObject.createNewUser(userData)
         
     def getUserName(self):
