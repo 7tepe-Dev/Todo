@@ -1,12 +1,7 @@
-import sys
-sys.path.insert(0, '../Todo/Frontend')
-from login import *
-
+import Frontend.login as front
 class Start:
     def __init__(self):
-        todoLoginObject = todoLogin()
+        todoLoginObject = front.todoLogin()
 
 if __name__ == '__main__':
     start = Start()
-    
-    

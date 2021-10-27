@@ -6,13 +6,12 @@ import sys
 import pickle
 
 
-# To import our modules
-sys.path.insert(0, '../Todo/Database')
-from DataHandler import *
+import Database.dataHandler as db
+import Backend.email as mail
 
 class todoMain():
     def __init__(self, currentUser):
-        database = DataHandler()    
+        database = db.DataHandler()    
         self.currentUser = currentUser          
         #crate app window, set title, logo and size
         global root
@@ -176,6 +175,11 @@ class todoMain():
         def clear_list():
             my_list.delete(0, END)
 
+        def send_email():
+            email = mail.Email(self.currentUser.get("email"))
+            email.setEmail(self.currentUser.get("tasks"))
+            email.sendEmail()
+
         # add buttons
         add_button = Button(button_frame, text="Add Item", command=add_item)
         delete_button = Button(button_frame, text="Delete Item", command=delete_item)
@@ -187,6 +191,7 @@ class todoMain():
         save_list_button = Button(button_frame, text="Save This ToDo", command=save_list)
         open_list_button = Button(button_frame, text="Open a ToDo List", command=open_list)
         clear_list_button = Button(button_frame, text="Clear This ToDo", command=clear_list)
+        send_list_button = Button(button_frame, text="Send This ToDo", command=send_email)
 
         # grid the buttons, only 1 row with all buttons
         add_button.grid(row=0, column=0)
@@ -198,7 +203,24 @@ class todoMain():
         save_list_button.grid(row=1, column=0, pady=10)
         open_list_button.grid(row=1, column=1, padx=20)
         clear_list_button.grid(row=1, column=4)
+        send_list_button.grid(row=1, column=3)
 
         root.mainloop()
 
 # todoMainObject = todoMain("")
+# frontendPath = "/ToDo/Frontend/"
+# backendPath = "/ToDo/Backend/"
+# databasePath = "/ToDo/Database/"
+# if frontendPath not in sys.path and backendPath not in sys.path and databasePath not in sys.path:
+#     sys.path.append(frontendPath)
+#     sys.path.append(backendPath)
+#     sys.path.append(databasePath)
+#     print("Paths added")
+
+# print(sys.path)
+# print(os.getcwd())
+
+# from login import todoLogin
+# from dataHandler import DataHandler
+# from todo import todoMain
+# from signin import todoSignin
