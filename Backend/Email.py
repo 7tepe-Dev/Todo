@@ -5,9 +5,9 @@ class Email:
     def __init__(self, target):
         self.host = "smtp.gmail.com"
         self.port = 465           #587
-        self.username = "ekerdiker18@gmail.com"
+        self.username = "ekerdiker@gmail"
         self.password = "BURAYA PASSWORD YAZINIZ"
-        self.sender = "ekerdiker18@gmail.com"
+        self.sender = "ekerdiker@gmail"
         self.targets = [target]
 
     def setEmail(self, userTasks):
